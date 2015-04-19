@@ -12,8 +12,9 @@ public class D
 
   try{
        
-      Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-      Connection con1=DriverManager.getConnection("jdbc:odbc:ss");
+     // Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
+      ConnectionHanlder connectionHanlder = new ConnectionHanlder();
+      Connection con1=connectionHanlder.getConnecton();//DriverManager.getConnection("jdbc:odbc:ss");
       Statement st1=con1.createStatement(java.sql.ResultSet.TYPE_SCROLL_INSENSITIVE,java.sql.ResultSet.CONCUR_READ_ONLY);
       ResultSet rs=null;
        BufferedReader reader = null;

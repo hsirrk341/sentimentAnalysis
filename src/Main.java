@@ -3,7 +3,7 @@
 import java.awt.*;
 
 
-public class Test1
+public class Main
 {
 	public static void main( String avg[] )
 	{
@@ -18,11 +18,11 @@ public class Test1
 		int h  = ( screen.height * 80 / 100 );
 
 
-		Homepg obj = new Homepg();
+		HomeScreen hs = new HomeScreen();
 
-		obj.setBounds( x, y, w, h );
+		hs.setBounds( x, y, w, h );
 
-		obj.setVisible( true );
+		hs.setVisible( true );
 //obj.setBackgroundcolor("black");
 	}
 }

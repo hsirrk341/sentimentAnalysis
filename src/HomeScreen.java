@@ -12,7 +12,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class Homepg extends JFrame implements ActionListener {
+public class HomeScreen extends JFrame implements ActionListener {
 	public String absolutePath = "";
 	String path = "";
 	String path1 = "";
@@ -26,7 +26,7 @@ public class Homepg extends JFrame implements ActionListener {
 
 	JFileChooser fileChooser = null;
 
-	public Homepg() {
+	public HomeScreen() {
 		Container con = this.getContentPane();
 
 		con.setLayout(new BorderLayout());
