@@ -32,7 +32,7 @@ String absolutePath1="";
 //Homepg ob=new Homepg();
 //String abc=ob.f1();;
 String xyz;//=ob.absolutePath;;
-String apath="";
+String absolutepath="";
 //public File f1=new File(abc);
 JFrame parent;
 
@@ -44,7 +44,7 @@ JFrame parent;
 		Container con = this.getContentPane(  );
 
 		con.setLayout( new GridLayout( 5,2 ) );
-		apath=path;
+		absolutepath=path;
 		//System.out.println(path);
 		p1 = new JButton( "PREPROCESSING" );
  
@@ -113,7 +113,7 @@ try
         {
 //System.out.println(abc);
                BufferedReader reader = null;
-                reader = new BufferedReader(new FileReader(apath));
+                reader = new BufferedReader(new FileReader(absolutepath));
                 BufferedWriter out = new BufferedWriter(new FileWriter("ip1.txt"));
 
 String line = reader.readLine();

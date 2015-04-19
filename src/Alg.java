@@ -40,7 +40,7 @@ public class Alg extends JFrame implements ItemListener, ActionListener {
 	String xyz;
 	String apath = "";
 	JFrame parent;
-
+  
 	public Alg(String path, JFrame parent) {
 		// UIManager.put("Panel.background", Color.BLUE);
 		this.parent = parent;
