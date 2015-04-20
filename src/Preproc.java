@@ -87,8 +87,9 @@ public class Preproc extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent ae) {
 
-		String url19 = "", filter = "", stop = "", wt = "";
-
+		String url19 = "", stop = "", wt = "";
+		StringBuilder url191 = new StringBuilder();
+		StringBuilder filter = new StringBuilder();
 		// *************** URL ****************
 
 		if (ae.getSource() == url) {
@@ -115,20 +116,22 @@ public class Preproc extends JFrame implements ActionListener {
 								URL url = new URL(item);
 
 								// out.write" " );
-								url19 = url19 + " ";
+								// url19 = url19 + " ";
+								url191.append(" ");
 
 							} catch (MalformedURLException e) {
 
 								// out.write item + " " );
-								url19 = url19 + item + " ";
-
+								// url19 = url19 + item + " ";
+								url191.append(item + " ");
 							}
 						// out.write"\n");
 						url19 = url19 + "\n";
+						url191.append("\n");
 
 					}
-					urlArea.setText(url19);
-					System.out.println("********");
+					urlArea.setText(url191.toString());
+					// System.out.println("********");
 					line = reader.readLine();
 				}
 				out.close();
@@ -140,7 +143,7 @@ public class Preproc extends JFrame implements ActionListener {
 
 			System.out.println(url19);
 
-			ok = url19;
+			ok = url191.toString();
 		}// if
 
 		// ************** FILTER ***************
@@ -151,7 +154,7 @@ public class Preproc extends JFrame implements ActionListener {
 			try {
 				int ip = 0;
 
-				String fin = "";
+				StringBuilder fin = new StringBuilder();
 
 				StringTokenizer tokens1 = new StringTokenizer(line, "\n");
 				while (tokens1.hasMoreTokens()) {
@@ -159,7 +162,7 @@ public class Preproc extends JFrame implements ActionListener {
 
 					String s = tokens1.nextToken();
 
-					String finals = "";
+					StringBuilder finals = new StringBuilder();
 					StringTokenizer tokens = new StringTokenizer(s, " ");
 					while (tokens.hasMoreTokens()) {
 
@@ -167,8 +170,8 @@ public class Preproc extends JFrame implements ActionListener {
 
 						int len = word.length();
 						if (len == 1) {
-							finals = finals + " ";
-							finals = finals + word + " ";
+							finals.append(" ");
+							finals.append(word + " ");
 						} else {
 							if (word.charAt(0) == '@' || word.charAt(0) == '#')// ||
 																				// word.charAt(1)=='@'
@@ -188,7 +191,7 @@ public class Preproc extends JFrame implements ActionListener {
 													.charAt(i + 2)) {
 										continue;
 									} else {
-										finals = finals + word.charAt(i);
+										finals.append(word.charAt(i));
 
 									}
 
@@ -196,29 +199,26 @@ public class Preproc extends JFrame implements ActionListener {
 								if (word.charAt(len - 2) == word
 										.charAt(len - 1)) {
 
-									finals = finals + word.charAt(len - 1);
+									finals.append(word.charAt(len - 1));
 
 								} else {
 
-									finals = finals + word.charAt(len - 2);
-									finals = finals + word.charAt(len - 1);
+									finals.append(word.charAt(len - 2));
+									finals.append(word.charAt(len - 1));
 								}
-								finals = finals + " ";
+								finals.append(" ");
 
 							}
 						}
 
 					}
-					finals = finals + "\n";
-					fin = fin + finals; //
+					finals.append("\n");
+					fin.append(finals); //
 				}
-				System.out.println(fin);
-				filter = fin;
-				ok = fin;
-				filterArea.setText(fin);
-				// out.writefin);
-				// out.close();
-				// }
+				// System.out.println(fin);
+				filter.append(fin);
+				ok = fin.toString();
+				filterArea.setText(fin.toString());
 
 			} catch (Exception e) {
 			}
@@ -234,10 +234,9 @@ public class Preproc extends JFrame implements ActionListener {
 				int i = 0;
 				String line = ok;
 				String fin = "";
-				String Kri[] = { "what", "where", "when", "how", "why", "who",
+				String whList[] = { "what", "where", "when", "how", "why", "who",
 						"whome", "which" };
 				for (int g = 0; g < 8; g++) {
-					System.out.println(Kri[g]);
 
 					StringTokenizer tokens = new StringTokenizer(line, "\n");
 					while (tokens.hasMoreTokens()) {
@@ -249,7 +248,7 @@ public class Preproc extends JFrame implements ActionListener {
 						int p0, p1, p2;
 						p0 = 0;
 
-						p1 = s.indexOf(Kri[g], p0);
+						p1 = s.indexOf(whList[g], p0);
 						int dum = p1;
 						// System.out.println(p1);
 						p2 = s.indexOf("?", p1);
@@ -269,7 +268,7 @@ public class Preproc extends JFrame implements ActionListener {
 								// System.out.println("hai world 11");
 								p0 = p2 + 1;
 								// System.out.println(p0);
-								p1 = s.indexOf(Kri[g], p0);
+								p1 = s.indexOf(whList[g], p0);
 								// System.out.println(p1);
 								p2 = s.indexOf("?", p1);
 								// System.out.println(p2);
@@ -319,8 +318,6 @@ public class Preproc extends JFrame implements ActionListener {
 				String line = ok;
 				String word1 = "";
 
-				// while( line != null)
-				// {
 				StringTokenizer tokens = new StringTokenizer(line, "\n");
 
 				while (tokens.hasMoreTokens()) {
@@ -334,9 +331,6 @@ public class Preproc extends JFrame implements ActionListener {
 					stop = stop + word;
 					ok = stop;
 					out7.write(word);
-					// out7.write("\n");
-					// }
-					//
 				}
 
 				splArea.setText(stop);
@@ -356,7 +350,6 @@ public class Preproc extends JFrame implements ActionListener {
 		else if (ae.getSource() == go) {
 
 			Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-			System.out.println(path2 + "sairammmmm");
 			int x = (screen.width * 10 / 100);
 			int y = (screen.height * 10 / 100);
 			int w = (screen.width * 80 / 100);

@@ -18,6 +18,7 @@ public class HomeScreen extends JFrame implements ActionListener {
 	String path1 = "";
 	String fullpath = "";
 	String data = "";
+	public static StringBuilder dataBuilder= new StringBuilder();
 	JButton open, next;
 
 	JScrollPane scroll = null;
@@ -91,7 +92,8 @@ public class HomeScreen extends JFrame implements ActionListener {
 						while (ch != -1) {
 							choosefile.append("" + (char) ch);
 							ch = fileReader.read();
-							data = data + (char) ch;
+						//	data = data + (char) ch;
+							dataBuilder.append((char)ch);
 						}
 						fileReader.close();
 					}// try
@@ -99,13 +101,14 @@ public class HomeScreen extends JFrame implements ActionListener {
 						JOptionPane.showMessageDialog(this, "message" + e,
 								"error", JOptionPane.INFORMATION_MESSAGE);
 					}
-					System.out.println(data);
+					//System.out.println(data1);
 
 				} else {
 
-					JOptionPane.showMessageDialog(this,
-							"File should be .txt", "Unknow file type",
-							JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane
+							.showMessageDialog(this, "File should be .txt",
+									"Unknow file type",
+									JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		}
@@ -113,7 +116,7 @@ public class HomeScreen extends JFrame implements ActionListener {
 		else if (ae.getSource() == next) {
 
 			// pathName1(absolutePath);
-			System.out.println(path1);
+		//	System.out.println(path1);
 			Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 
 			int x = (screen.width * 10 / 100);

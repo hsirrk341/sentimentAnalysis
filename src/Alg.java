@@ -108,7 +108,6 @@ public class Alg extends JFrame implements ItemListener, ActionListener {
 			String type = (String) combotype.getSelectedItem();
 
 			if ("naviebayes".equals(type)) {
-				// System.out.println("*****1122222***");
 				double y = 0, totalpol = 0, pol;
 				double pospol, negpol;
 				try {
@@ -121,9 +120,8 @@ public class Alg extends JFrame implements ItemListener, ActionListener {
 					num2 = 0;
 					num3 = 0;
 					List<String> list3 = new ArrayList<String>();
-					// Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
 					ConnectionHanlder connectionHanlder = new ConnectionHanlder();
-					Connection con = connectionHanlder.getConnecton(); // DriverManager.getConnection("jdbc:odbc:sai");
+					Connection con = connectionHanlder.getConnecton(); 
 					Statement st = con.createStatement(
 							java.sql.ResultSet.TYPE_SCROLL_INSENSITIVE,
 							java.sql.ResultSet.CONCUR_READ_ONLY);
