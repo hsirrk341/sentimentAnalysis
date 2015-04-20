@@ -139,9 +139,9 @@ public class Alg extends JFrame implements ItemListener, ActionListener {
 					String line = reader.readLine();
 					// posArea.setText(apath);
 					int size = -1, count7 = 0;
-					while (line != null) {
+					if (abpath != null) {
 
-						StringTokenizer tokens = new StringTokenizer(line, "\n");
+						StringTokenizer tokens = new StringTokenizer(abpath, "\n");
 						while (tokens.hasMoreTokens()) {
 							totpol = 0;
 							num = num + 1;
@@ -150,21 +150,21 @@ public class Alg extends JFrame implements ItemListener, ActionListener {
 									".");
 							while (tokens4.hasMoreTokens()) {
 								// count7++;
-								String r9 = tokens4.nextToken();
+								String eachSentence = tokens4.nextToken();
 
-								StringTokenizer tokens1 = new StringTokenizer(
-										r9, " ");
+								StringTokenizer eachWordToken = new StringTokenizer(
+										eachSentence, " ");
 								totpol = 0;
 								count = 0;
 								totalpolarity = 0;
-								while (tokens1.hasMoreTokens()) {
-									String r2 = tokens1.nextToken();
+								while (eachWordToken.hasMoreTokens()) {
+									String eachWord = eachWordToken.nextToken();
 									size++;
 									// System.out.print("sai78908 ");
-									System.out.print(r2);
+									System.out.print(eachWord);
 									System.out.print(" ");
 									String sql = "select * from navie s1 where s1.name1='"
-											+ r2 + "' ";
+											+ eachWord + "' ";
 
 									ResultSet rs = st.executeQuery(sql);
 
@@ -244,7 +244,7 @@ public class Alg extends JFrame implements ItemListener, ActionListener {
 						overallpolarity = 0;
 						totpol = 0;
 						count7 = 0;
-						line = reader.readLine();
+						//line = reader.readLine();
 
 					}
 

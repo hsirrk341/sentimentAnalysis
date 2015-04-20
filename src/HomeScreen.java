@@ -1,15 +1,14 @@
 // Browsing.
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.*;
 import java.lang.*;
 import java.net.URL;
 import java.net.MalformedURLException;
 import java.util.StringTokenizer;
 import java.awt.*;
+
 import javax.swing.*;
+
 import java.awt.event.*;
 
 public class HomeScreen extends JFrame implements ActionListener {
@@ -86,16 +85,21 @@ public class HomeScreen extends JFrame implements ActionListener {
 					choosefile.setText("");
 
 					try {
-						FileReader fileReader = new FileReader(absolutePath);
+						//FileReader fileReader = new FileReader(absolutePath);
+						BufferedReader reader = null;
+						reader = new BufferedReader(new FileReader(absolutePath));
 						int ch;
-						ch = fileReader.read();
-						while (ch != -1) {
-							choosefile.append("" + (char) ch);
-							ch = fileReader.read();
+						String line = reader.readLine();
+
+						while (line != null) {
+						//while (ch != -1) {
+							choosefile.append(line+"\n");
+							//ch = fileReader.read();
 						//	data = data + (char) ch;
-							dataBuilder.append((char)ch);
+							dataBuilder.append(line+"\n");
+							line = reader.readLine();
 						}
-						fileReader.close();
+						//fileReader.close();
 					}// try
 					catch (Exception e) {
 						JOptionPane.showMessageDialog(this, "message" + e,

@@ -94,57 +94,52 @@ public class Preproc extends JFrame implements ActionListener {
 
 		if (ae.getSource() == url) {
 			try {
-				// System.out.println(abc);
-				BufferedReader reader = null;
-				reader = new BufferedReader(new FileReader(absolutepath));
-				BufferedWriter out = new BufferedWriter(new FileWriter(
-						"ip1.txt"));
+				String line = HomeScreen.dataBuilder.toString();
 
-				String line = reader.readLine();
-
-				while (line != null) {
-
-					StringTokenizer tokens = new StringTokenizer(line, "\n");
-
-					while (tokens.hasMoreTokens()) {
-
-						String word = tokens.nextToken();
-						String[] words = word.split("\\s");
-
-						for (String item : words)
-							try {
-								URL url = new URL(item);
-
-								// out.write" " );
-								// url19 = url19 + " ";
-								url191.append(" ");
-
-							} catch (MalformedURLException e) {
-
-								// out.write item + " " );
-								// url19 = url19 + item + " ";
-								url191.append(item + " ");
-							}
-						// out.write"\n");
-						url19 = url19 + "\n";
-						url191.append("\n");
-
-					}
-					urlArea.setText(url191.toString());
-					// System.out.println("********");
-					line = reader.readLine();
-				}
-				out.close();
+				ok = line.replaceAll("http.*?\\s", " ");
+				// if (line != null) {
+				//
+				// StringTokenizer tokens = new StringTokenizer(line, "\n");
+				//
+				// while (tokens.hasMoreTokens()) {
+				//
+				// String word = tokens.nextToken();
+				// String[] words = word.split("\\s");
+				//
+				// for (String item : words)
+				// try {
+				// URL url = new URL(item);
+				//
+				// // out.write" " );
+				// // url19 = url19 + " ";
+				// url191.append("");
+				//
+				// } catch (MalformedURLException e) {
+				//
+				// // out.write item + " " );
+				// // url19 = url19 + item + " ";
+				// url191.append(item + " ");
+				// }
+				// // out.write"\n");
+				// // url19 = url19 + "\n";
+				// url191.append("\n");
+				//
+				// }
+				// urlArea.setText(url191.toString());
+				// // System.out.println("********");
+				// // line = reader.readLine();
+				// }
+				// out.close();
 			}
 
 			catch (Exception e) {
 				e.printStackTrace();
 			}
+			urlArea.setText(ok);
+			// System.out.println(url19);
 
-			System.out.println(url19);
-
-			ok = url191.toString();
-		}// if
+			// ok = url191.toString();
+		}
 
 		// ************** FILTER ***************
 
@@ -218,7 +213,7 @@ public class Preproc extends JFrame implements ActionListener {
 				// System.out.println(fin);
 				filter.append(fin);
 				ok = fin.toString();
-				filterArea.setText(fin.toString());
+				filterArea.setText(ok);
 
 			} catch (Exception e) {
 			}
@@ -227,80 +222,62 @@ public class Preproc extends JFrame implements ActionListener {
 
 		// ************ what *****************
 
-		else if (ae.getSource() == what) {
+		else if (  false ){//ae.getSource() == what) {
 
 			try {
-				// System.out.println("99999999999999999999999 "+ok);
 				int i = 0;
 				String line = ok;
 				String fin = "";
-				String whList[] = { "what", "where", "when", "how", "why", "who",
-						"whome", "which" };
+				String whList[] = { "what", "where", "when", "how", "why",
+						"who", "whome", "which" };
+				StringBuilder finalBuilder = new StringBuilder();
 				for (int g = 0; g < 8; g++) {
-
 					StringTokenizer tokens = new StringTokenizer(line, "\n");
 					while (tokens.hasMoreTokens()) {
-
 						i++;
 						String s = tokens.nextToken();
-
 						String finals = "";
 						int p0, p1, p2;
 						p0 = 0;
-
 						p1 = s.indexOf(whList[g], p0);
 						int dum = p1;
-						// System.out.println(p1);
 						p2 = s.indexOf("?", p1);
-						// System.out.println(p2);
 						if (p1 != -1 && p2 != -1) {
 							dum--;
 							if (p1 == 0) {
 							} else {
 								String sub = s.substring(p0, dum);
-
-								// 78System.out.println(sub);
 								finals = finals + sub;
-
 							}
-
 							while (p1 >= 0) {
-								// System.out.println("hai world 11");
 								p0 = p2 + 1;
-								// System.out.println(p0);
 								p1 = s.indexOf(whList[g], p0);
-								// System.out.println(p1);
 								p2 = s.indexOf("?", p1);
-								// System.out.println(p2);
 								if (p1 == -1) {
 									break;
 								} else {
 									finals = finals + s.substring(p0, p1 - 1);
-									// System.out.println(finals);
 								}
 							}
-							// System.out.println("out");
 							if (p0 < s.length()) {
 								finals = finals + s.substring(p0);
 							}
 
-							// System.out.println("hai final");
-
-							// System.out.println(fin);
 						} else {
 							finals = s;
 						}
-						finals = finals + "\n";
-						fin = fin + finals;
+						//finals = finals + "\n";
+						finalBuilder.append(finals+"\n");
+						//fin = fin + finals;
 
 					}
-					line = fin;
-					fin = "";
+//					line = fin;
+//					fin = "";
 				}
-				fin = line;
-				System.out.println(fin);
-				line = fin;
-				ok = line;
+//				fin = line;
+//				System.out.println(fin);
+				//line = fin;
+				ok = finalBuilder.toString();
 				// System.out.println("99jjjjj9    "+ok);
 				// out.writeline);
 				// out.close();
@@ -312,37 +289,32 @@ public class Preproc extends JFrame implements ActionListener {
 
 		else if (ae.getSource() == spsy) {
 			try {
-				BufferedWriter out7 = new BufferedWriter(new FileWriter(
-						"p1.txt"));
 
-				String line = ok;
-				String word1 = "";
-
-				StringTokenizer tokens = new StringTokenizer(line, "\n");
-
-				while (tokens.hasMoreTokens()) {
-
-					String word = tokens.nextToken();
-					word1 = word.replaceAll("[$%#@(&,''{}!?)]", " ");
-
-					word = word1;
-
-					word = word + "\n";
-					stop = stop + word;
-					ok = stop;
-					out7.write(word);
-				}
-
-				splArea.setText(stop);
-				go.setVisible(true);
-				out7.write("\n");
-				out7.write("\n");
-				out7.write("\n");
-				out7.write("\n");
-				out7.close();
+				path2 = ok.replaceAll("[$%#@(&,''{}!?)]", " ");
+				// BufferedWriter out7 = new BufferedWriter(new FileWriter(
+				// "p1.txt"));
+				//
+				// String line = ok;
+				// String word1 = "";
+				// StringBuilder fulltext= new StringBuilder();
+				// StringTokenizer tokens = new StringTokenizer(line, "\n");
+				//
+				// while (tokens.hasMoreTokens()) {
+				//
+				// String word = tokens.nextToken();
+				// word1 = word.replaceAll("[$%#@(&,''{}!?)]", " ");
+				// fulltext.append(word.replaceAll("[$%#@(&,''{}!?)]",
+				// " ")+"\n");
+				// ok = stop;
+				// out7.write(word);
+				// }
+				//
+				// splArea.setText(stop);
+				 go.setVisible(true);
+				splArea.setText(path2);
 			} catch (Exception e) {
 			}
-			path2 = ok;
+		//	path2 = ok;
 			// send1=stop;
 
 		}// else if
