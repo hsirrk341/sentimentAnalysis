@@ -16,7 +16,7 @@ import javax.swing.JColorChooser;
 public class Preproc extends JFrame implements ActionListener {
 
 	JButton open, url, filtering, spsy, what, go, back, p1;
-	public String ok = "", send1 = "", path2 = "";
+	public String ok = "",ok1="", send1 = "", path2 = "";
 	JScrollPane scroll1 = null;
 	JScrollPane scroll2 = null;
 	JScrollPane scroll3 = null;
@@ -92,11 +92,18 @@ public class Preproc extends JFrame implements ActionListener {
 		StringBuilder filter = new StringBuilder();
 		// *************** URL ****************
 
+		
+ 
 		if (ae.getSource() == url) {
 			try {
+				
 				String line = HomeScreen.dataBuilder.toString();
-
+				
+				
+				ok1=line.replaceAll("{\"votes*?text\": \"", " ");
+				line = ok1.replaceAll("\", \"type*?}", " ");
 				ok = line.replaceAll("http.*?\\s", " ");
+				
 				// if (line != null) {
 				//
 				// StringTokenizer tokens = new StringTokenizer(line, "\n");
