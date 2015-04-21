@@ -100,8 +100,8 @@ public class Preproc extends JFrame implements ActionListener {
 				String line = HomeScreen.dataBuilder.toString();
 				
 				
-				ok1=line.replaceAll("{\"votes*?text\": \"", " ");
-				line = ok1.replaceAll("\", \"type*?}", " ");
+				ok1=line.replaceAll("\\{.*?text\": \"", " ");
+				line = ok1.replaceAll("\", \"type.*?\\}", " ");
 				ok = line.replaceAll("http.*?\\s", " ");
 				
 				// if (line != null) {
@@ -229,9 +229,11 @@ public class Preproc extends JFrame implements ActionListener {
 
 		// ************ what *****************
 
-		else if (  false ){//ae.getSource() == what) {
-
-			try {
+		else if (ae.getSource() == what) {
+			String line = ok;
+			ok= line.replaceAll("(?:Who|What|When|Where|Why|Which|Whom|Whose).*?[^\\?\\.\\!]+\\?", " ");
+			whArea.setText(ok);
+			/*try {
 				int i = 0;
 				String line = ok;
 				String fin = "";
@@ -292,7 +294,7 @@ public class Preproc extends JFrame implements ActionListener {
 			} catch (Exception e) {
 			}
 
-		}// if else
+*/		}// if else
 
 		else if (ae.getSource() == spsy) {
 			try {
