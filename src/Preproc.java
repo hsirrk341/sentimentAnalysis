@@ -1,16 +1,18 @@
 // Browsing.
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.*;
 import java.lang.*;
 import java.net.URL;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 import java.awt.*;
+
 import javax.swing.*;
+
 import java.awt.event.*;
+
 import javax.swing.JColorChooser;
 
 public class Preproc extends JFrame implements ActionListener {
@@ -33,6 +35,7 @@ public class Preproc extends JFrame implements ActionListener {
 	String absolutepath = "";
 	// public File f1=new File(abc);
 	JFrame parent;
+	List<String> list1 = new ArrayList<String>();
 
 	public Preproc(String path, JFrame parent) {
 
@@ -100,8 +103,8 @@ public class Preproc extends JFrame implements ActionListener {
 				String line = HomeScreen.dataBuilder.toString();
 				
 				
-				ok1=line.replaceAll("{\"votes*?text\": \"", " ");
-				line = ok1.replaceAll("\", \"type*?}", " ");
+				ok1=line.replaceAll("\\{.*?text\": \"", " ");
+				line = ok1.replaceAll("\", \"type.*?\\}", " ");
 				ok = line.replaceAll("http.*?\\s", " ");
 				
 				// if (line != null) {
@@ -151,7 +154,6 @@ public class Preproc extends JFrame implements ActionListener {
 		// ************** FILTER ***************
 
 		else if (ae.getSource() == filtering) {
-
 			String line = ok;
 			try {
 				int ip = 0;
@@ -169,7 +171,7 @@ public class Preproc extends JFrame implements ActionListener {
 					while (tokens.hasMoreTokens()) {
 
 						String word = tokens.nextToken();
-
+						list1.add(word);
 						int len = word.length();
 						if (len == 1) {
 							finals.append(" ");
@@ -229,9 +231,11 @@ public class Preproc extends JFrame implements ActionListener {
 
 		// ************ what *****************
 
-		else if (  false ){//ae.getSource() == what) {
-
-			try {
+		else if (ae.getSource() == what) {
+			String line = ok;
+			ok= line.replaceAll("(?:Who|What|When|Where|Why|Which|Whom|Whose).*?[^\\?\\.\\!]+\\?", " ");
+			whArea.setText(ok);
+			/*try {
 				int i = 0;
 				String line = ok;
 				String fin = "";
@@ -292,9 +296,9 @@ public class Preproc extends JFrame implements ActionListener {
 			} catch (Exception e) {
 			}
 
-		}// if else
+*/		}// if else
 
-		else if (ae.getSource() == spsy) {
+		/*else if (ae.getSource() == spsy) {
 			try {
 
 				path2 = ok.replaceAll("[$%#@(&,''{}!?)]", " ");
@@ -324,8 +328,57 @@ public class Preproc extends JFrame implements ActionListener {
 		//	path2 = ok;
 			// send1=stop;
 
-		}// else if
+		}*/// else if
+		else if(ae.getSource()==spsy)
+		{
+		 try {
+		    BufferedWriter out7 = new BufferedWriter(new FileWriter("p1.txt"));
+		    
 
+		    
+		String line=ok;
+		String word1="";
+
+
+
+		//while( line != null)
+		//{
+//		StringTokenizer tokens = new StringTokenizer(line, "\n");
+//
+//		while(tokens.hasMoreTokens())
+//		{ 
+
+		//String word = tokens.nextToken();
+		  word1=line.replaceAll("[$%#@(&,''{}!?)]" ," ");
+
+
+		//word=word1;
+
+		//word=word+"\n";
+		//stop=stop+word;
+		  stop =word1;
+		ok=stop;
+		    out7.write(word1);
+		//out7.write("\n");
+		//}
+		//
+		//}
+
+
+
+		splArea.setText(stop);
+		go.setVisible(true);
+		out7.write("\n");
+		out7.write("\n");
+		out7.write("\n");
+		out7.write("\n");
+		out7.close();
+		} catch (Exception e) {
+		}
+		path2=ok;
+		//send1=stop;
+
+		}//else if
 		else if (ae.getSource() == go) {
 
 			Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
@@ -335,7 +388,7 @@ public class Preproc extends JFrame implements ActionListener {
 
 			int h = (screen.height * 80 / 100);
 
-			Alg al = new Alg(path2, this);
+			Alg al = new Alg(path2, this,list1);
 
 			al.setBounds(x, y, w, h);
 

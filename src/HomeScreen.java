@@ -118,7 +118,6 @@ public class HomeScreen extends JFrame implements ActionListener {
 		}
 
 		else if (ae.getSource() == next) {
-
 			// pathName1(absolutePath);
 		//	System.out.println(path1);
 			Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
