@@ -1,8 +1,5 @@
 // Browsing.
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.*;
 import java.lang.*;
 import java.awt.*;
@@ -12,13 +9,14 @@ import java.util.StringTokenizer;
 import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.BorderLayout;
+
 import javax.swing.*;
+
 import java.awt.event.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.*;
-import java.util.ArrayList;
 import java.sql.*;
 import java.awt.Font;
 
@@ -40,16 +38,17 @@ public class Analyse extends JFrame implements ActionListener {
 	String xyz;
 	String apath = "";
 	JFrame parent;
-
-	public Analyse(int n1, int n2, int n3, int n4, JFrame parent) {
+	String negativeReviews;
+	String positiveReviews;
+	public Analyse(int n1, int n2, int n3, int n4, JFrame parent, String negativeReviews, String positiveReviews) {
 		// UIManager.put("Panel.background", Co);
 		this.parent = parent;
 		num = n1;
 		num1 = n2;
 		num2 = n3;
 		num3 = n4;
-		System.out.println(num1 + " " + num2 + "*************** " + num3 + " "
-				+ num);
+		this.negativeReviews=negativeReviews;
+		this.positiveReviews=positiveReviews;
 		Container con = this.getContentPane();
 
 		con.setLayout(new BorderLayout());
@@ -141,7 +140,6 @@ public class Analyse extends JFrame implements ActionListener {
 			b = num1;
 			c = num2;
 			d = num3;
-			System.out.println(a + " " + b + " " + c + " " + d);
 			String s = "";
 			String s1 = "No of comments:";
 			String s2 = "No of positive comments:";
@@ -153,31 +151,19 @@ public class Analyse extends JFrame implements ActionListener {
 				s2 = Integer.toString(b);
 				s3 = Integer.toString(c);
 				s4 = Integer.toString(d);
-				System.out.println(s1 + "  " + s2 + "&&&&&&&&&&&&&&&&&& " + s3
-						+ " " + s4);
 				noval.setText("" + s1);
-				// noval.setForeground(Color.WHITE);
-				System.out.println("krishna99");
 				pcval.setText("" + s2);
-				// pcval.setForeground(Color.WHITE);
-				System.out.println("krishna100");
 				ncval.setText("" + s3);
-				// ncval.setForeground(Color.WHITE);
-				System.out.println("krishna200");
 				nucval.setText("" + s4);
-				// nucval.setForeground(Color.WHITE);
 
 			} else if (ae.getSource() == percent) {
 				float posperc = ((float) b / (b + c)) * 100;
 				float negperc = ((float) c / (b + c)) * 100;
 				String s5 = Float.toString(posperc);
 				String s6 = Float.toString(negperc);
-				System.out.println(s5 + " " + s6);
 
 				poval.setText(s5);
-				// poval.setForeground(Color.WHITE);
 				neval.setText(s6);
-				// neval.setForeground(Color.WHITE);
 			} else if (ae.getSource() == fe) {
 				System.out.println("feature selction");
 
@@ -191,7 +177,7 @@ public class Analyse extends JFrame implements ActionListener {
 
 				int h = (screen.height * 80 / 100);
 
-				Fs3 obj = new Fs3(this);
+				FeatureSelection obj = new FeatureSelection(this,negativeReviews,positiveReviews);
 
 				obj.setBounds(x, y, w, h);
 

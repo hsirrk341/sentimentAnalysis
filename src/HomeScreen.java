@@ -32,7 +32,7 @@ public class HomeScreen extends JFrame implements ActionListener {
 		con.setLayout(new BorderLayout());
 		// UIManager.put("Panel.background", Color.BLUE);
 
-		JLabel title = new JLabel("Home page", JLabel.CENTER);
+		JLabel title = new JLabel("Sentiment Analysis", JLabel.CENTER);
 
 		title.setFont(new Font("Arial", Font.BOLD, 25));
 
@@ -130,7 +130,7 @@ public class HomeScreen extends JFrame implements ActionListener {
 
 			int h = (screen.height * 80 / 100);
 
-			Preproc p1 = new Preproc(path1, this);
+			Preprocessor p1 = new Preprocessor(path1, this);
 
 			p1.setBounds(x, y, w, h);
 
